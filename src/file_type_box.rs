@@ -12,7 +12,6 @@ pub struct FileTypeBox {
 
 impl FileTypeBox {
     pub fn new(reader: &mut BufReader<File>, file_offset: u32, size: u32) -> FileTypeBox {
-        println!("file_offset={file_offset}, data_size={size}");
         reader
             // FIXME: u64??
             .seek(SeekFrom::Start((file_offset + 4) as u64)) // skip ftyp header

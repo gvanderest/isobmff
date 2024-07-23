@@ -4,7 +4,6 @@ use std::{fs::File, io::BufReader};
 #[derive(Debug, Clone)]
 pub struct IsoBox {
     size: u32,
-    data_size: u32,
     file_box_start_offset: u32,
 
     raw_type: String,
@@ -25,7 +24,6 @@ impl<'a> IsoBox {
         return IsoBox {
             r#type,
             size,
-            data_size: size,
             file_box_start_offset,
             raw_type,
         };
@@ -37,7 +35,7 @@ impl<'a> IsoBox {
                 return IsoBoxData::FileType(FileTypeBox::new(
                     reader,
                     self.file_box_start_offset,
-                    self.data_size,
+                    self.size,
                 ));
             }
             _ => {

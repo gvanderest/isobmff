@@ -63,7 +63,7 @@ impl IsoParser {
             // Seek forward for the entire box, minus the data we've already read (size and type)
             reader
                 // FIXME: u64 and i64??
-                .seek(SeekFrom::Current(size as i64))
+                .seek(SeekFrom::Start((file_box_start_offset + size) as u64))
                 .unwrap();
             file_box_start_offset += size;
         }
